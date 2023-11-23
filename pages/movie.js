@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import "../tailwind.css";
 
 function MovieList() {
   const [topRatedData, setTopRatedData] = useState([]);
@@ -56,7 +57,7 @@ function MovieList() {
         <div className="flex flex-row">
           {bestofSeriesData &&
             bestofSeriesData.map((item) => (
-              <div key={item.id} className="flex flex-row bg-black">
+              <div key={item.id} className="flex flex-row">
                 <h1>{item.rank}</h1>
                 {/* <Image src={item.image} width={100} height={100}/> */}
                 <div>
@@ -77,9 +78,9 @@ function MovieList() {
         <div className="flex flex-row">
           {topRatedData &&
             topRatedData.map((item) => (
-              <div key={item.id} className="flex flex-row bg-black">
+              <div key={item.id} className="flex flex-row">
                 {/* <Image src={item.image} width={100} height={100}/> */}
-                  <p>{item.title}</p>
+                <p>{item.title}</p>
                 <div className="flex flex-row">
                   <p>{item.rating}</p>
                   <p>{item.genre}</p>
