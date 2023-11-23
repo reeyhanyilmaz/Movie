@@ -22,10 +22,10 @@ export default function Home() {
     router.push("/movie");
   };
 
-  const userName = localStorage.getItem("name");
-  if (userName) {
-    alert(`Hello, ${userName}. Logged in successfully!`);
-  }
+  // const userName = localStorage.getItem("name");
+  // if (userName) {
+  //   alert(`Hello, ${userName}. Logged in successfully!`);
+  // }
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-evenly p-24">
