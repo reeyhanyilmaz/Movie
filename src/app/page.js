@@ -43,7 +43,7 @@ export default function Home() {
       <div className="flex flex-col gap-5">
         <input type="text" placeholder="Enter your name" value={name} onChange={handleInputChange} />
         <input type="password" placeholder="Enter your password" value={password} onChange={handlePasswordChange} />
-        <button type="submit" onClick={handleSubmit}>
+        <button className="bg-pink-500" type="submit" onClick={handleSubmit}>
           Login
         </button>
       </div>

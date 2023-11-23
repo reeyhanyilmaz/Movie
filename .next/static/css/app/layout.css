@@ -587,8 +587,20 @@ video {
 .gap-5 {
   gap: 1.25rem;
 }
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+.bg-pink-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 72 153 / var(--tw-bg-opacity));
+}
 .p-24 {
   padding: 6rem;
+}
+.text-fuchsia-600 {
+  --tw-text-opacity: 1;
+  color: rgb(192 38 211 / var(--tw-text-opacity));
 }
 
 :root {
