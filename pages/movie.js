@@ -2,55 +2,76 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import "../tailwind.css";
+import { useRouter } from "next/router";
 
 function MovieList() {
   const [topRatedData, setTopRatedData] = useState([]);
   const [bestofSeriesData, setBestofSeriesData] = useState([]);
+  const router = useRouter();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await axios
+  //       .get("https://imdb-top-100-movies.p.rapidapi.com/", {
+  //         headers: {
+  //           "X-RapidAPI-Key": "52468f2f54msh985f69293a2eb70p120022jsnac3aaff0b50f",
+  //           "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
+  //         },
+  //       })
+  //       .then((response) => {
+  //         setTopRatedData(response.data);
+  //         console.log("top of rated", response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("https://imdb-top-100-movies.p.rapidapi.com/", {
-          headers: {
-            "X-RapidAPI-Key": "52468f2f54msh985f69293a2eb70p120022jsnac3aaff0b50f",
-            "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
-          },
-        })
-        .then((response) => {
-          setTopRatedData(response.data);
-          console.log("top of rated", response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
+  //   fetchData();
+  // }, []);
 
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await axios
+  //       .get("https://imdb-top-100-movies.p.rapidapi.com/series/", {
+  //         headers: {
+  //           "X-RapidAPI-Key": "52468f2f54msh985f69293a2eb70p120022jsnac3aaff0b50f",
+  //           "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
+  //         },
+  //       })
+  //       .then((response) => {
+  //         setBestofSeriesData(response.data);
+  //         console.log("movies series", response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("https://imdb-top-100-movies.p.rapidapi.com/series/", {
-          headers: {
-            "X-RapidAPI-Key": "52468f2f54msh985f69293a2eb70p120022jsnac3aaff0b50f",
-            "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
-          },
-        })
-        .then((response) => {
-          setBestofSeriesData(response.data);
-          console.log("movies series", response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
+  //   fetchData();
+  // }, []);
 
-    fetchData();
-  }, []);
+  const handlePaymentClick = () => {
+    router.push("/payment");
+  };
 
   return (
-    <main className="bg-red">
+    <main>
+      <nav className="flex justify-evenly">
+        <p>CineMax</p>
+        <div className="flex justify-evenly">
+          <p>Movies</p>
+          <p>Series</p>
+          <p>Animation</p>
+          <p>Genres</p>
+        </div>
+
+        <div className="flex justify-evenly">
+          <p>Search</p>
+          <button onClick={handlePaymentClick}>Payment</button>
+          <p>Nofitication</p>
+          <p>Profile</p>
+        </div>
+      </nav>
       <div>
         <h2 className="text-fuchsia-600">Top Rated</h2>
         {/* top rated */}
@@ -74,7 +95,6 @@ function MovieList() {
       {/* movie series */}
       <div>
         <h2>Best of Series</h2>
-
         <div className="flex flex-row">
           {topRatedData &&
             topRatedData.map((item) => (
