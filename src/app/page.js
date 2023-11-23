@@ -19,7 +19,7 @@ export default function Home() {
   const handleSubmit = () => {
     localStorage.setItem("username", name);
     localStorage.setItem("password", password);
-    router.push("/movie");
+    router.push("/movies");
   };
 
   // const userName = localStorage.getItem("name");
