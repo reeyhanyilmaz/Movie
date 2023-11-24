@@ -1,52 +1,42 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 function MoviesNavbar() {
   const router = useRouter();
-
   const handlePaymentClick = () => {
     router.push("/payment");
   };
 
   return (
     <nav>
-      <div class="relative flex h-16 items-center justify-between px-2 mx-auto max-w-7xl">
+      <div class="relative flex h-[72px] items-center justify-between px-8 mx-auto dark:text-white dark:bg-darkModaFirstColor">
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <Image className="mr-11" src="/light_mode_CineMax.svg" width={87} height={28} />
-          <div class="hidden sm:ml-6 sm:block">
-            <div class="flex space-x-4">
-              <a
-                href="#"
-                class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                aria-current="page"
-              >
-                Movies
-              </a>
-              <a
-                href="#"
-                class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Series
-              </a>
-              <a
-                href="#"
-                class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Animation
-              </a>
-              <a
-                href="#"
-                class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Genres
-              </a>
-            </div>
+          <Image className="mr-11 dark:block" src="/dark_mode_CineMax.svg" width={87} height={28} />
+          <Image className="mr-11 dark:hidden" src="/light_mode_CineMax.svg" width={87} height={28} />
+
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+              aria-current="page"
+            >
+              Movies
+            </a>
+            <a href="#" class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              Series
+            </a>
+            <a href="#" class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              Animation
+            </a>
+            <a href="#" class="blackTextColor hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+              Genres
+            </a>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div class="flex lg:ml-6">
-            <a href="#" class="p-2 text-blackTextColor hover:text-gray-500">
+            <a href="#" class="p-2 text-blackTextColor hover:text-gray-500 dark:text-white">
               <span class="sr-only">Search</span>
               <svg
                 class="h-6 w-6"
@@ -69,7 +59,10 @@ function MoviesNavbar() {
             Payment
           </button>
 
-          <button type="button" class="ml-8 relative p-1 text-blackTextColor hover:text-gray-400  focus:outline-none">
+          <button
+            type="button"
+            class="ml-8 relative p-1 text-blackTextColor hover:text-gray-400 focus:outline-none dark:text-white"
+          >
             <svg
               class="h-6 w-6"
               fill="none"
@@ -97,7 +90,8 @@ function MoviesNavbar() {
               width={100}
               height={100}
             />
-            <Image src="/movies/down_arrow.svg" width={20} height={20} />
+            <Image className="dark:hidden" src="/movies/down_arrow.svg" width={20} height={20} />
+            <Image className="dark:block" src="/movies/dark_mode_down_arrow.svg" width={20} height={20} />
           </div>
         </div>
       </div>
