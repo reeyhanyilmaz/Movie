@@ -17,6 +17,7 @@ module.exports = {
         lightGrayTextColor: `#9CA4AB`,
         ligthModeBorderColor: `#E9EBED`,
         blackTextColor: `#171725`,
+        inputBackgroundColor: `#F9F9F9`,
       },
     },
   },
