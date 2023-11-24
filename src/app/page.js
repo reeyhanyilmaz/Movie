@@ -5,15 +5,27 @@ import Login from "@/components/Login/Login";
 
 export default function Home() {
   return (
-    <main className="flex max-h-screen">
-      <Image className="flex-shrink-0 w-1/2" src="/light_mode_login.svg" alt="login" width={500} height={500} priority />
-
-      <div class="space-y-6 p-24 w-1/2 flex flex-col justify-center items-center">
-        <Image src="/light_mode_CineMax.svg" alt="logo" width={87} height={28} priority />
-        <p className="text-bold text-center text-2xl">
+    <main className="flex min-h-screen">
+      <Image src="/login/light_mode_login.svg" alt="login" width={700} height={300} />
+      <div class="w-1/2 space-y-6 p-14 flex flex-col items-center">
+        <Image className="mb-[20px]" src="light_mode_CineMax.svg" alt="logo" width={87} height={28} />
+        <p className="font-bold text-center text-2xl">
           Hey there, <br />
           welcome back
         </p>
+        <div className="flex items-center justify-center min-w-[500px] pl-5 py-2.5 text-base font-semibold bg-inputBackgroundColor h-14 border-1 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ">
+          <Image className="mr-4" src="/login/google.svg" width={24} height={24} />
+          Login with Google
+        </div>
+        <div className="flex items-center justify-center min-w-[500px] pl-5 py-2.5 text-base  font-semibold bg-inputBackgroundColor h-14 border-1 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ">
+          <Image className="mr-4" src="/login/facebook.svg" width={24} height={24} />
+          Login with Facebook
+        </div>
+        <div className="flex items-center">
+          <div className="w-[190px] bg-ligthModeBorderColor h-0.5"></div>
+          <p className="text-sm text-grayTextColor font-medium mx-4">Or login with</p>
+          <div className="w-[190px] bg-ligthModeBorderColor h-0.5"></div>
+        </div>
         <Login />
       </div>
     </main>

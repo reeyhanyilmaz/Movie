@@ -26,10 +26,10 @@ function Login() {
   return (
     <form class="space-y-6" onSubmit={handleSubmit(handleLogin)}>
       <div>
-        <label class="block text-sm font-medium leading-6 text-grayTextColor">Full Name</label>
+        <label class="text-sm font-medium leading-6 text-grayTextColor">Full Name</label>
         <div class="mt-2">
           <input
-            className="block min-w-[500px] rounded-3xl pl-5 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-lightGrayTextColor focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="min-w-[500px] rounded-3xl pl-5 py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-lightGrayTextColor focus-visible:outline-none sm:text-sm sm:leading-6"
             type="text"
             placeholder="Enter your name"
             {...register("name", {
@@ -47,11 +47,11 @@ function Login() {
 
       <div>
         <div class="flex items-center justify-between">
-          <label class="block text-sm font-medium leading-6 text-grayTextColor">Password</label>
+          <label class="text-sm font-medium leading-6 text-grayTextColor">Password</label>
         </div>
         <div class="mt-2">
           <input
-            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:lightGrayTextColor0 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:lightGrayTextColor0 focus-visible:outline-none sm:text-sm sm:leading-6"
             type="password"
             placeholder="Enter your password"
             {...register("password", {
@@ -65,7 +65,7 @@ function Login() {
           />
         </div>
         {errors.password ? <p className="max-w-[400px] text-rose-600 text-sm mt-1">{errors.password.message}</p> : null}
-        <div class="text-sm mt-4">
+        <div class="text-sm mt-4 flex justify-end">
           <a href="#" class="font-semibold text-pinkColor hover:text-pink-400">
             Forgot password
           </a>
@@ -83,7 +83,7 @@ function Login() {
 
       <p class="mt-10 text-center text-sm text-lightGrayTextColor">
         Don't have an account?
-        <a href="#" class="font-semibold leading-6 text-pinkColor hover:text-pink-400">
+        <a href="#" class="font-semibold leading-6 text-pinkColor hover:text-pink-400 ml-1">
           Register
         </a>
       </p>
