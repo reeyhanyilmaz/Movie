@@ -54,7 +54,9 @@ function MovieList() {
               {movies &&
                 movies.map((item) => (
                   <div key={item.id} className="flex flex-row">
-                    <p className="flex items-center text-blackTextColor text-[56px] font-semibold mr-4 dark:text-white">{item.rank}</p>
+                    <p className="flex items-center text-blackTextColor text-[56px] font-semibold mr-4 dark:text-white">
+                      {item.rank}
+                    </p>
                     <div className="w-[274px] h-[137px] flex mr-[25px]">
                       <Image className="rounded-2xl mr-4" src={item.image} width={112} height={137} />
                       <div className="flex flex-col justify-between">

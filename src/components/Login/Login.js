@@ -29,7 +29,7 @@ function Login() {
         <label class="text-sm font-medium leading-6 text-grayTextColor">Full Name</label>
         <div class="mt-2">
           <input
-            className="min-w-[500px] rounded-3xl pl-5 py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-lightGrayTextColor focus-visible:outline-none sm:text-sm sm:leading-6"
+            className="min-w-[500px] rounded-3xl pl-5 py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-lightGrayTextColor focus-visible:outline-none sm:text-sm sm:leading-6 dark:bg-darkModaSecondColor dark:text-white"
             type="text"
             placeholder="Enter your name"
             {...register("name", {
@@ -51,7 +51,7 @@ function Login() {
         </div>
         <div class="mt-2">
           <input
-            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:lightGrayTextColor0 focus-visible:outline-none sm:text-sm sm:leading-6"
+            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 bg-inputBackgroundColor text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:lightGrayTextColor0 focus-visible:outline-none sm:text-sm sm:leading-6 dark:bg-darkModaSecondColor dark:text-white"
             type="password"
             placeholder="Enter your password"
             {...register("password", {
@@ -72,14 +72,14 @@ function Login() {
         </div>
       </div>
 
-      <div>
+  
         <button
           type="submit"
           class="flex min-w-[500px] justify-center rounded-3xl bg-pinkColor py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Login
         </button>
-      </div>
+     
 
       <p class="mt-10 text-center text-sm text-lightGrayTextColor">
         Don't have an account?
