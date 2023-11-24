@@ -2,6 +2,8 @@
 import React from "react";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
+import Image from "next/image";
+// import "../globals.css"
 
 function Payment() {
   const {
@@ -17,21 +19,27 @@ function Payment() {
 
   return (
     <div className="min-h-screen">
-      <nav className="text-center h-[72px] pt-[22px] border-b-2 border-[#E9EBED]">CineMax</nav>
+      <nav className="flex justify-center items-center h-[72px] border-b border-ligthModeBorderColor">
+        <Image src="/light_mode_CineMax.svg" width={87} height={28} />
+      </nav>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-row justify-evenly px-20">
-          <div className="w-8/12 flex flex-col py-20">
-            <h2>Payment Method</h2>{" "}
-            <input
-              className="bg-[#F9F9F9] h-14 border-1 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none "
-              type="text"
-            />
+        <div className="flex flex-row justify-evenly">
+          <div className="w-8/12 flex flex-col py-16 px-20">
+            <p className="text-2xl font-bold mb-6">Payment Method</p>
+            <div className="flex items-center gap-1 text-base font-bold italic bg-inputBackgroundColor h-14 border border-pinkColor rounded-3xl max-w-[625px] mt-1 mb-6 py-2 pl-4">
+              <input className="checkmark mr-4" type="radio" checked />
+              <Image src="/payment/paypal.svg" width={17} height={20} mr-2 /> Paypal
+            </div>
+            <div className="flex items-center bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4">
+              <input className="mr-4" type="radio" />
+              <Image src="/payment/apple_pay.svg" width={45} height={20} />
+            </div>
             <p className="text-lightGrayTextColor mt-6">Or checkout using a credit card</p>
             <div className="flex flex-col mt-6">
               <label className="text-grayTextColor">Cardholder Name</label>
               <input
-                className={`bg-[#F9F9F9] h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
-                  errors.cardholdername ? "border-red-500" : ""
+                className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
+                  errors.cardholdername ? "border border-red-500" : ""
                 }`}
                 type="text"
                 {...register("cardholdername", {
@@ -52,9 +60,11 @@ function Payment() {
                 <InputMask
                   mask="9999 9999 9999 9999"
                   maskChar=" "
-                  className="bg-[#F9F9F9] h-14 border-1 rounded-3xl mt-1 py-2 pl-4 focus-visible:outline-none"
+                  className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
+                    errors.cardnumber ? "border border-red-500" : ""
+                  }`}
                   type="text"
-                  placeholder="Ex:  31111 1111 1111 1111"
+                  placeholder="Ex: 31111 1111 1111 1111"
                   {...register("cardnumber", {
                     required: "Card number is required",
                     pattern: {
@@ -71,13 +81,15 @@ function Payment() {
                 <InputMask
                   mask="99/99"
                   maskChar=""
-                  className="bg-[#F9F9F9] h-14 border-1 rounded-3xl mt-1 py-2 pl-4 focus-visible:outline-none"
+                  className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
+                    errors.expiration ? "border border-red-500" : ""
+                  }`}
                   type="text"
                   placeholder="MM/YY"
                   {...register("expiration", {
                     required: "Expiration is required",
                     pattern: {
-                      value: /^(0[1-9]|1[0-1])\/(2[4-9]|1[3-9]\d|\d{3,})$/,
+                      value: /^(0[1-9]|1[0-1])\/(202[0-2]|20[0-2]\d|\d{3,})$/,
                       message: "Please enter a date after 11/23",
                     },
                   })}
@@ -90,7 +102,9 @@ function Payment() {
               <div className="flex flex-col">
                 <label className="text-grayTextColor">CVV</label>
                 <input
-                  className="bg-[#F9F9F9] h-14 border-1 rounded-3xl mt-1 py-2 pl-4 focus-visible:outline-none"
+                  className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
+                    errors.cvv ? "border border-red-500" : ""
+                  }`}
                   type="number"
                   {...register("cvv", {
                     required: "CVV is required",
@@ -106,7 +120,9 @@ function Payment() {
             <div className="flex flex-col mt-6">
               <label className="text-grayTextColor">Postal Code</label>
               <input
-                className="bg-[#F9F9F9] h-14 border-1 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none"
+                className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none ${
+                  errors.postalcode ? "border border-red-500" : ""
+                }`}
                 type="text"
                 placeholder="Postal or ZIP code"
                 {...register("postalcode", {
@@ -117,30 +133,28 @@ function Payment() {
                   },
                 })}
               />
-              {errors.postalcode ? (
-                <p className="text-rose-600 text-sm mt-1">{errors.postalcode.message}</p>
-              ) : null}
+              {errors.postalcode ? <p className="text-rose-600 text-sm mt-1">{errors.postalcode.message}</p> : null}
             </div>
           </div>
-          <div className="w-4/12 flex flex-col h-screen border-l-2 border-[#E9EBED] pl-14 py-20">
-            <div className="flex flex-row justify-between">
-              <p>Subtotal</p>
-              <p>$4.99</p>
+          <div className="w-4/12 flex flex-col h-screen border-l border-ligthModeBorderColor bg-inputBackgroundColor pl-14 py-10 pr-20">
+            <div className="flex flex-row justify-between mb-6">
+              <p className="text-lightGrayTextColor text-base">Subtotal</p>
+              <p className="font-semibold">$4.99</p>
             </div>
-            <div className="flex flex-row justify-between">
-              <p>Plan Type</p>
-              <p>Monthly</p>
+            <div className="flex flex-row justify-between mb-6">
+              <p className="text-lightGrayTextColor text-base">Plan Type</p>
+              <p className="font-semibold">Monthly</p>
             </div>
-            <div className="flex flex-row justify-between">
-              <p>Monthly plan discount</p>
-              <p>-$5</p>
+            <div className="flex flex-row justify-between mb-6">
+              <p className="text-lightGrayTextColor text-base">Monthly plan discount</p>
+              <p className="font-semibold">-$5</p>
             </div>
-            <div className="border-2 border-[#E9EBED] my-7"></div>
+            <div className="border border-ligthModeBorderColor my-7"></div>
             <div className="flex flex-row justify-between justify-between mb-7">
-              <p>Billed Now</p>
+              <p className="text-lightGrayTextColor text-base">Billed Now</p>
               <p className="text-[#B43FEB] font-semibold">$35</p>
             </div>
-            <p className="mb-16">
+            <p className="mb-16 text-grayTextColor">
               You will be charged $5 every yearly thereafter while the subscription is active. Cancel any time.
             </p>
             <button className="bg-[#B43FEB] py-4 px-10  rounded-3xl text-white" type="submit">
