@@ -17,24 +17,43 @@ function Payment() {
     console.log("data :>> ", data);
   };
 
+  const handleExpirationValidation = (value) => {
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1;
+    const currentYear = Number(today.getFullYear().toString().slice(2));
+    const monthAndYear = value.split("/");
+    const month = Number(monthAndYear[0]);
+    const year = Number(monthAndYear[1]);
+
+    if (year < currentYear) {
+      return "Enter a valid year";
+    }
+
+    if (year == currentYear && month < currentMonth) {
+      return "Enter a valid month";
+    }
+
+    return true;
+  };
+
   return (
     <div className="min-h-screen">
       <nav className="flex justify-center items-center h-[72px] border-b border-ligthModeBorderColor dark:bg-darkModaFirstColor dark:border-[#29282F]">
-        <Image className="dark:block" src="/dark_mode_CineMax.svg" width={87} height={28} />
-        <Image className="dark:hidden" src="/light_mode_CineMax.svg" width={87} height={28} />
+        <Image className="dark:block" src="/dark_mode_CineMax.svg" width={87} height={28} alt="cinemax_logo" />
+        <Image className="dark:hidden" src="/light_mode_CineMax.svg" width={87} height={28} alt="cinemax_logo" />
       </nav>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row justify-evenly dark:bg-darkModaFirstColor">
           <div className="w-8/12 flex flex-col py-16 px-20">
             <p className="text-2xl font-bold mb-6 dark:text-white">Payment Method</p>
             <div className="flex items-center gap-1 text-base font-bold italic bg-inputBackgroundColor h-14 border border-pinkColor rounded-3xl max-w-[625px] mt-1 mb-6 py-2 pl-4 dark:text-white dark:bg-darkModaSecondColor">
-              <input className="checkmark mr-4" type="radio" checked />
-              <Image src="/payment/paypal.svg" width={17} height={20} mr-2 /> Paypal
+              <input className="checkmark mr-4" type="radio" defaultChecked />
+              <Image className="mr-2" src="/payment/paypal.svg" width={17} height={20} alt="paypal" /> Paypal
             </div>
             <div className="flex items-center bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 dark:bg-darkModaSecondColor">
               <input className="mr-4" type="radio" />
-              <Image className="dark:block" src="/payment/dark_mode_apple_pay.svg" width={45} height={20} />
-              <Image className="dark:hidden" src="/payment/apple_pay.svg" width={45} height={20} />
+              {/* <Image className="dark:block" src="/payment/dark_mode_apple_pay.svg" width={45} height={20} alt="apple_logo"/> */}
+              <Image className="dark:hidden" src="/payment/apple_pay.svg" width={45} height={20} alt="apple_logo" />
             </div>
             <p className="text-lightGrayTextColor mt-6">Or checkout using a credit card</p>
             <div className="flex flex-col mt-6">
@@ -90,10 +109,7 @@ function Payment() {
                   placeholder="MM/YY"
                   {...register("expiration", {
                     required: "Expiration is required",
-                    pattern: {
-                      value: /^(0[1-9]|1[0-1])\/(202[0-2]|20[0-2]\d|\d{3,})$/,
-                      message: "Please enter a date after 11/23",
-                    },
+                    validate: (value) => handleExpirationValidation(value),
                   })}
                 />
                 {errors.expiration ? (
