@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function SideBar() {
   return (
-    <div className="w-1/6 flex flex-col items-start pt-11 pl-8 min-h-screen bg-[#F9F9F9] border-r-2 border-[ligthModeBorderColor]">
+    <div className="w-1/6 flex flex-col items-start pt-11 pl-8 min-h-screen bg-inputBackgroundColor border-r border-[ligthModeBorderColor]">
       <p className="text-base text-lightGrayTextColor">MENU</p>
       <button className="mt-6 text-base font-semibold text-grayTextColor flex">
         <Image className="mr-3" src="/movies/discover.svg" width={24} height={24} /> Discovery
@@ -24,7 +24,7 @@ function SideBar() {
       </button>
       <div className="mt-8 flex items-center justify-center">
         <span className="text-base font-semibold text-grayTextColor flex">
-          <Image className="mr-3" src="/movies/moon.svg" width={24} height={24} /> Dark Mode 
+          <Image className="mr-3" src="/movies/moon.svg" width={24} height={24} /> Dark Mode
         </span>
         <Toggle />
       </div>
