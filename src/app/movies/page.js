@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-
 import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
 import MoviesNavbar from "@/components/Movies/MoviesNavbar";
 import SideBar from "@/components/Movies/SideBar";
+import "../globals.css";
 
 function MovieList() {
   const { error, loading, movies } = useMovies();
@@ -19,26 +19,35 @@ function MovieList() {
         <div className="w-5/6 pl-8">
           {/* movies */}
           <div>
-            <h2 className="text-2xl font-bold text-blackTextColor">Top Rated</h2>
+            <h2 className="text-2xl font-bold text-blackTextColor mb-6">Top Rated</h2>
             <div className="flex flex-row">
               {loading ? <p>loading...</p> : null}
               {error ? <p>error...</p> : null}
               {movies &&
                 movies.map((item) => (
                   <div key={item.id} className="flex flex-row">
-                    <p className="text-blackTextColor text-[56px] font-semibold">{item.rank}</p>
-                    <Image src={item.image} width={100} height={100} />
-                    <div>
-                      <p>{item.year}</p>
-                      <p>{item.title}</p>
-                      {item.genre.map((genre, index) => (
-                        <p key={index} className="text-grayTextColor">
-                          {genre}
+                    <p className="flex items-center text-blackTextColor text-[56px] font-semibold mr-4">{item.rank}</p>
+                    <div className="w-[274px] h-[137px] flex mr-[25px]">
+                      <Image className="rounded-2xl mr-4" src={item.image} width={112} height={137} />
+                      <div className="flex flex-col justify-between">
+                        <p className="flex justify-center rounded-lg py-1 px-2 border border-ligthModeBorderColor w-[47px] text-lightGrayTextColor">
+                          {item.year}
                         </p>
-                      ))}
-                      <p>
-                        <Image src="/movies/star.svg" width={20} height={20} /> {item.rating}
-                      </p>
+                        <p className="truncate-text text-base font-bold">{item.title}</p>
+                        <div className="flex">
+                          <Image src="/movies/film.svg" width={16} height={16} />
+                          {item.genre.map((genre, index) => (
+                            <p key={index} className="text-grayTextColor text-sm flex">
+                              {genre}
+                              {index < item.genre.length - 1 && <span className="ml-1 mr-1">•</span>}
+                            </p>
+                          ))}
+                        </div>
+
+                        <p className="flex gap-1">
+                          <Image src="/movies/star.svg" width={20} height={20} /> {item.rating}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
