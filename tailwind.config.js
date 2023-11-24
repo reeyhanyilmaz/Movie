@@ -13,8 +13,10 @@ module.exports = {
       },
       colors: {
         pinkColor: `#B43FEB`,
-        greyTextColor: `#78828A`,
-        ligthtGrayTextColor: `#9CA4AB`
+        grayTextColor: `#78828A`,
+        lightGrayTextColor: `#9CA4AB`,
+        ligthModeBorderColor: `#E9EBED`,
+        blackTextColor: `#171725`,
       },
     },
   },
