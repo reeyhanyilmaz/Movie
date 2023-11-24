@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
@@ -11,6 +11,27 @@ function MovieList() {
   const { error, loading, movies } = useMovies();
   const { error: seriesError, loading: seriesLoading, series } = useSeries();
 
+  //scroll
+  const containerRef = useRef(null);
+  const [startX, setStartX] = useState(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e) => {
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+  };
+
+  const handleMouseUp = () => {
+    setStartX(null);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!startX) return;
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 0.5; // kaydırma hızı
+    containerRef.current.scrollLeft = scrollLeft - walk;
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
   return (
     <main>
       <MoviesNavbar />
@@ -20,7 +41,14 @@ function MovieList() {
           {/* movies */}
           <div>
             <h2 className="text-2xl font-bold text-blackTextColor mb-6">Top Rated</h2>
-            <div className="flex flex-row">
+            <div
+              className="flex flex-row overflow-hidden"
+              ref={containerRef}
+              onMouseDown={handleMouseDown} //sürükleme
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove} // icerik kaydırma
+              onMouseLeave={handleMouseUp} //sürükleme bitiyor
+            >
               {loading ? <p>loading...</p> : null}
               {error ? <p>error...</p> : null}
               {movies &&
@@ -33,11 +61,11 @@ function MovieList() {
                         <p className="flex justify-center rounded-lg py-1 px-2 border border-ligthModeBorderColor w-[47px] text-lightGrayTextColor">
                           {item.year}
                         </p>
-                        <p className="truncate-text text-base font-bold">{item.title}</p>
+                        <p className="truncate-text text-base font-bold w-[150px]">{item.title}</p>
                         <div className="flex">
                           <Image src="/movies/film.svg" width={16} height={16} />
                           {item.genre.map((genre, index) => (
-                            <p key={index} className="text-grayTextColor text-sm flex">
+                            <p key={index} className="truncate-text text-grayTextColor text-sm flex">
                               {genre}
                               {index < item.genre.length - 1 && <span className="ml-1 mr-1">•</span>}
                             </p>
@@ -61,8 +89,8 @@ function MovieList() {
               {seriesError ? <p>error...</p> : null}
               {series &&
                 series.map((item) => (
-                  <div key={item.id} className="flex flex-col w-[264] h-[251] mb-4">
-                    <Image className="rounded-2xl mb-3" src={item.image} width={264} height={183} />
+                  <div key={item.id} className="flex flex-col mb-4">
+                    <Image className="rounded-2xl mb-3 max-h-[260px]" src={item.image} width={264} height={183} />
                     <p className="text-base font-bold mb-3">{item.title}</p>
                     <div className="flex flex-row items-center">
                       <span className="flex pr-1">
