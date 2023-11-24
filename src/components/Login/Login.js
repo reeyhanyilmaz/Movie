@@ -11,14 +11,6 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const handleInputChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleLogin = (data) => {
     console.log("data :>> ", data);
     localStorage.setItem("username", data.name);
@@ -34,15 +26,14 @@ function Login() {
   return (
     <form class="space-y-6" onSubmit={handleSubmit(handleLogin)}>
       <div>
-        <label class="block text-sm font-medium leading-6 text-greyTextColor">Full Name</label>
+        <label class="block text-sm font-medium leading-6 text-grayTextColor">Full Name</label>
         <div class="mt-2">
           <input
-            className="block min-w-[500px] rounded-3xl pl-5 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-ligthtGrayTextColor focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block min-w-[500px] rounded-3xl pl-5 py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-lightGrayTextColor focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             type="text"
             placeholder="Enter your name"
-            onChange={handleInputChange}
             {...register("name", {
-              required: "This field is required",
+              required: "Name is required",
               pattern: {
                 value: /^[A-Za-z]{3,20}$/,
                 message:
@@ -51,21 +42,20 @@ function Login() {
             })}
           />
         </div>
-        {errors.name ? <p className="max-w-[400px] text-rose-600">{errors.name.message}</p> : null}
+        {errors.name ? <p className="max-w-[400px] text-rose-600 text-sm mt-1">{errors.name.message}</p> : null}
       </div>
 
       <div>
         <div class="flex items-center justify-between">
-          <label class="block text-sm font-medium leading-6 text-greyTextColor">Password</label>
+          <label class="block text-sm font-medium leading-6 text-grayTextColor">Password</label>
         </div>
         <div class="mt-2">
           <input
-            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:ligthtGrayTextColor0 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="block min-w-[500px] rounded-3xl pl-5  py-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:lightGrayTextColor0 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             type="password"
             placeholder="Enter your password"
-            onChange={handlePasswordChange}
             {...register("password", {
-              required: "This field is required",
+              required: "Password is required",
               pattern: {
                 value: /^(?=.*[0-9]).{4,8}/,
                 message:
@@ -74,7 +64,7 @@ function Login() {
             })}
           />
         </div>
-        {errors.password ? <p className="max-w-[400px] text-rose-600">{errors.password.message}</p> : null}
+        {errors.password ? <p className="max-w-[400px] text-rose-600 text-sm mt-1">{errors.password.message}</p> : null}
         <div class="text-sm mt-4">
           <a href="#" class="font-semibold text-pinkColor hover:text-pink-400">
             Forgot password
@@ -91,7 +81,7 @@ function Login() {
         </button>
       </div>
 
-      <p class="mt-10 text-center text-sm text-ligthtGrayTextColor">
+      <p class="mt-10 text-center text-sm text-lightGrayTextColor">
         Don't have an account?
         <a href="#" class="font-semibold leading-6 text-pinkColor hover:text-pink-400">
           Register
