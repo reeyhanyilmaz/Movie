@@ -9,12 +9,13 @@ export default function Home() {
 
   return (
     <main className="flex h-screen dark:bg-darkModaFirstColor">
-      <div className="w-1/2">
+      <div className="w-1/2 relative">
         <Image
+          style={{ objectPosition: "top" }}
+          className="object-cover"
           src={theme === "dark" ? "/login/dark_mode_login.svg" : "/login/light_mode_login.svg"}
-          width="570"
-          height="200"
           priority="low"
+          fill
           alt="login_image"
         />
       </div>
