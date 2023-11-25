@@ -5,6 +5,7 @@ import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
 import MoviesNavbar from "@/components/Movies/MoviesNavbar";
 import SideBar from "@/components/Movies/SideBar";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function MovieList() {
   const { error, loading, movies } = useMovies();
@@ -40,6 +41,17 @@ function MovieList() {
           {/* movies */}
           <div>
             <h2 className="text-2xl font-bold text-blackTextColor mb-6 dark:text-white">Top Rated</h2>
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <ClipLoader
+                  color="#B43FEB"
+                  loading={loading}
+                  size={100}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : null}
             <div
               className="flex flex-row overflow-hidden"
               ref={containerRef}
@@ -48,7 +60,6 @@ function MovieList() {
               onMouseMove={handleMouseMove} //icerik kaydırma
               onMouseLeave={handleMouseUp} //sürükleme bitiyor
             >
-              {loading ? <p>loading...</p> : null}
               {error ? <p>error...</p> : null}
               {movies &&
                 movies.map((item) => (
@@ -90,8 +101,18 @@ function MovieList() {
           {/* series */}
           <div className="mt-10">
             <p className="mb-6 text-2xl font-bold text-blackTextColor dark:text-white">Best of Series</p>
+            {seriesLoading ? (
+              <div className="flex flex-1 justify-center items-center">
+                <ClipLoader
+                  color="#B43FEB"
+                  loading={seriesLoading}
+                  size={100}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : null}
             <div className="grid grid-cols-4 gap-x-6">
-              {seriesLoading ? <p>loading...</p> : null}
               {seriesError ? <p>error...</p> : null}
               {series &&
                 series.map((item) => (
