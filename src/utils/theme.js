@@ -12,5 +12,7 @@ export const setInitialTheme = () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme) {
     toggleTheme(savedTheme);
+  } else {
+    toggleTheme("light");
   }
 };
