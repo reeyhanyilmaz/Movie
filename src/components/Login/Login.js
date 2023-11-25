@@ -7,7 +7,6 @@ function Login() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -35,7 +34,7 @@ function Login() {
             {...register("name", {
               required: "Name is required",
               pattern: {
-                value: /^[A-Za-z]{3,20}$/,
+                value: /^[a-zA-ZıİğĞüÜşŞöÖçÇ\s]{3,20}$/,
                 message:
                   "Name must be at least 3 characters and at most 20 characters long, and it should consist only of letters",
               },
@@ -72,14 +71,12 @@ function Login() {
         </div>
       </div>
 
-  
-        <button
-          type="submit"
-          class="flex min-w-[500px] justify-center rounded-3xl bg-pinkColor py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Login
-        </button>
-     
+      <button
+        type="submit"
+        class="flex min-w-[500px] justify-center rounded-3xl bg-pinkColor py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Login
+      </button>
 
       <p class="mt-10 text-center text-sm text-lightGrayTextColor">
         Don't have an account?
