@@ -1,17 +1,29 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-// import "../globals.css"
+import { initialTheme } from "../../utils/initialTheme";
 
 function Payment() {
+  initialTheme(); //tema kontrol
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+    getValues,
+  } = useForm({
+    mode: "all",
+    reValidateMode: "onChange",
+    defaultValues: {
+      cardholdername: "",
+      cardnumber: "",
+      expiration: "",
+      cvv: "",
+      postalcode: "",
+    },
+  });
 
   const onSubmit = (data) => {
     console.log("data :>> ", data);
@@ -36,24 +48,78 @@ function Payment() {
     return true;
   };
 
+  const submitButtonDisabled = () => {
+    //inputlar bos mu kontrol ediliyor, bos ise button disabled
+    const inputValues = getValues();
+    const isAnyEmpty = Object.values(inputValues).some((item) => item.trim() === "");
+
+    if (Object.keys(errors).length > 0) {
+      return true;
+    }
+
+    if (isAnyEmpty) {
+      return true;
+    }
+
+    return false;
+  };
+
+  let logoSrc;
+  if (localStorage.getItem("theme") == "light") {
+    logoSrc = "/light_mode_CineMax.svg";
+  } else {
+    logoSrc = "/dark_mode_CineMax.svg";
+  }
+
+  let appleLogo;
+  if (localStorage.getItem("theme") == "light") {
+    appleLogo = "/payment/apple_pay.svg";
+  } else {
+    appleLogo = "/payment/dark_mode_apple_pay.svg";
+  }
+
+  //paypal or apple pay checked
+  const [selectedOption, setSelectedOption] = useState("paypal");
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
   return (
     <div className="min-h-screen">
       <nav className="flex justify-center items-center h-[72px] border-b border-ligthModeBorderColor dark:bg-darkModaFirstColor dark:border-[#29282F]">
-        <Image className="dark:block" src="/dark_mode_CineMax.svg" width={87} height={28} alt="cinemax_logo" />
-        <Image className="dark:hidden" src="/light_mode_CineMax.svg" width={87} height={28} alt="cinemax_logo" />
+        <Image src={logoSrc} width={87} height={28} alt="cinemax_logo" />
       </nav>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row justify-evenly dark:bg-darkModaFirstColor">
           <div className="w-8/12 flex flex-col py-16 px-20">
             <p className="text-2xl font-bold mb-6 dark:text-white">Payment Method</p>
-            <div className="flex items-center gap-1 text-base font-bold italic bg-inputBackgroundColor h-14 border border-pinkColor rounded-3xl max-w-[625px] mt-1 mb-6 py-2 pl-4 dark:text-white dark:bg-darkModaSecondColor">
-              <input className="checkmark mr-4" type="radio" defaultChecked />
-              <Image className="mr-2" src="/payment/paypal.svg" width={17} height={20} alt="paypal" /> Paypal
-            </div>
-            <div className="flex items-center bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 dark:bg-darkModaSecondColor">
-              <input className="mr-4" type="radio" />
-              {/* <Image className="dark:block" src="/payment/dark_mode_apple_pay.svg" width={45} height={20} alt="apple_logo"/> */}
-              <Image className="dark:hidden" src="/payment/apple_pay.svg" width={45} height={20} alt="apple_logo" />
+            <div>
+              <div
+                className={`flex items-center gap-1 text-base font-bold italic bg-inputBackgroundColor h-14 border ${
+                  selectedOption === "paypal" ? "border border-pinkColor" : "border-none"
+                } rounded-3xl max-w-[625px] mt-1 mb-6 py-2 pl-4 dark:text-white dark:bg-darkModaSecondColor`}
+              >
+                <input
+                  className="mr-4"
+                  type="radio"
+                  checked={selectedOption === "paypal"}
+                  onChange={() => handleOptionChange("paypal")}
+                />
+                <Image className="mr-2" src="/payment/paypal.svg" width={17} height={20} alt="paypal" /> Paypal
+              </div>
+              <div
+                className={`flex items-center bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 dark:bg-darkModaSecondColor ${
+                  selectedOption === "applePay" ? "border border-pinkColor" : ""
+                }`}
+              >
+                <input
+                  className="mr-4"
+                  type="radio"
+                  checked={selectedOption === "applePay"}
+                  onChange={() => handleOptionChange("applePay")}
+                />
+                <Image src={appleLogo} width={45} height={20} alt="apple_logo" />
+              </div>
             </div>
             <p className="text-lightGrayTextColor mt-6">Or checkout using a credit card</p>
             <div className="flex flex-col mt-6">
@@ -123,6 +189,7 @@ function Payment() {
                   className={`bg-inputBackgroundColor h-14 rounded-3xl max-w-[625px] mt-1 py-2 pl-4 focus-visible:outline-none dark:bg-darkModaSecondColor dark:text-white ${
                     errors.cvv ? "border border-red-500" : ""
                   }`}
+                  maxLength="3"
                   type="number"
                   {...register("cvv", {
                     required: "CVV is required",
@@ -175,7 +242,11 @@ function Payment() {
             <p className="mb-16 text-grayTextColor">
               You will be charged $5 every yearly thereafter while the subscription is active. Cancel any time.
             </p>
-            <button className="bg-[#B43FEB] py-4 px-10  rounded-3xl text-white" type="submit">
+            <button
+              className="bg-[#B43FEB] py-4 px-10 rounded-3xl text-white disabled:bg-gray-400"
+              type="submit"
+              disabled={submitButtonDisabled()}
+            >
               Pay
             </button>
           </div>
