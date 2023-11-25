@@ -1,11 +1,25 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from "@/components/Login/Login";
 import { useTheme } from "next-themes";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (mounted === false) {
+    return (
+      <div className="flex flex-1 justify-center items-center">
+        <ClipLoader color="#B43FEB" loading={true} size={100} aria-label="Loading Spinner" data-testid="loader" />
+      </div>
+    );
+  }
 
   return (
     <main className="flex h-screen dark:bg-darkModaFirstColor">

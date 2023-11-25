@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Payment() {
   const { theme, setTheme } = useTheme();
@@ -69,6 +70,21 @@ function Payment() {
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
+
+  //theme check
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (mounted === false) {
+    return (
+      <div className="flex flex-1 justify-center items-center">
+        <ClipLoader color="#B43FEB" loading={true} size={100} aria-label="Loading Spinner" data-testid="loader" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
