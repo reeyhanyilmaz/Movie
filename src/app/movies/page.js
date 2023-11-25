@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect} from "react";
 import Image from "next/image";
 import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
@@ -31,6 +31,21 @@ function MovieList() {
     containerRef.current.scrollLeft = scrollLeft - walk;
     setScrollLeft(containerRef.current.scrollLeft);
   };
+
+  // theme check
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (mounted === false) {
+    return (
+      <div className="flex flex-1 justify-center items-center">
+        <ClipLoader color="#B43FEB" loading={true} size={100} aria-label="Loading Spinner" data-testid="loader" />
+      </div>
+    );
+  }
 
   return (
     <main>
