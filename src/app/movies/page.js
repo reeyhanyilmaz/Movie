@@ -5,13 +5,10 @@ import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
 import MoviesNavbar from "@/components/Movies/MoviesNavbar";
 import SideBar from "@/components/Movies/SideBar";
-import { initialTheme } from "../../utils/initialTheme";
 
 function MovieList() {
   const { error, loading, movies } = useMovies();
   const { error: seriesError, loading: seriesLoading, series } = useSeries();
-
-  initialTheme(); // tema kontrol
 
   //scroll
   const containerRef = useRef(null);
@@ -60,14 +57,14 @@ function MovieList() {
                       {item.rank}
                     </p>
                     <div className="w-[274px] h-[137px] flex mr-[25px]">
-                      <Image className="rounded-2xl mr-4" src={item.image} width={112} height={137} />
+                      <Image className="rounded-2xl mr-4" src={item.image} width={112} height={137} alt="movie"/>
                       <div className="flex flex-col justify-between">
                         <p className="flex justify-center rounded-lg py-1 px-2 border border-ligthModeBorderColor w-[47px] text-lightGrayTextColor dark:border-[#29282F]">
                           {item.year}
                         </p>
-                        <p className="text-base font-bold overflow-hidden overflow-ellipsis whitespace-nowrap w-[150px] dark:text-white ">{item.title}</p>
+                        <p className="text-base font-bold overflow-hidden overflow-ellipsis whitespace-nowrap w-[150px] dark:text-white">{item.title}</p>
                         <div className="flex">
-                          <Image src="/movies/film.svg" width={16} height={16} />
+                          <Image src="/movies/film.svg" width={16} height={16} alt="icon"/>
                           {item.genre.map((genre, index) => (
                             <p key={index} className="overflow-hidden overflow-ellipsis whitespace-nowrap text-grayTextColor text-sm flex">
                               {genre}
@@ -77,7 +74,7 @@ function MovieList() {
                         </div>
 
                         <p className="flex gap-1 dark:text-white">
-                          <Image src="/movies/star.svg" width={20} height={20} /> {item.rating}
+                          <Image src="/movies/star.svg" width={20} height={20} alt="icon"/> {item.rating}
                         </p>
                       </div>
                     </div>
@@ -94,11 +91,11 @@ function MovieList() {
               {series &&
                 series.map((item) => (
                   <div key={item.id} className="flex flex-col mb-4">
-                    <Image className="rounded-2xl mb-3 max-h-[260px]" src={item.image} width={264} height={183} />
+                    <Image className="object-cover rounded-2xl mb-3 max-h-[250px]" src={item.image} width={264} height={183} alt="movie_image" />
                     <p className="text-base font-bold mb-3 dark:text-white">{item.title}</p>
                     <div className="flex flex-row items-center">
                       <span className="flex pr-1">
-                        <Image className="pr-px" src="/movies/star.svg" width={18} height={18} />
+                        <Image className="pr-px" src="/movies/star.svg" width={18} height={18} alt="icon"/>
                         <p className="font-xs font-semibold dark:text-white">{item.rating}</p>
                       </span>
                       <div className="flex justify-center items-center h-3.5 w-0.5 bg-grayTextColor mr-2"></div>

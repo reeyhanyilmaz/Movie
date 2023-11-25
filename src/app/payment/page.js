@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { initialTheme } from "../../utils/initialTheme";
+import { useTheme } from "next-themes";
 
 function Payment() {
-  initialTheme(); //tema kontrol
+  const { theme, setTheme } = useTheme();
 
   const {
     register,
@@ -64,20 +64,6 @@ function Payment() {
     return false;
   };
 
-  let logoSrc;
-  if (localStorage.getItem("theme") == "light") {
-    logoSrc = "/light_mode_CineMax.svg";
-  } else {
-    logoSrc = "/dark_mode_CineMax.svg";
-  }
-
-  let appleLogo;
-  if (localStorage.getItem("theme") == "light") {
-    appleLogo = "/payment/apple_pay.svg";
-  } else {
-    appleLogo = "/payment/dark_mode_apple_pay.svg";
-  }
-
   //paypal or apple pay checked
   const [selectedOption, setSelectedOption] = useState("paypal");
   const handleOptionChange = (option) => {
@@ -87,7 +73,12 @@ function Payment() {
   return (
     <div className="min-h-screen">
       <nav className="flex justify-center items-center h-[72px] border-b border-ligthModeBorderColor dark:bg-darkModaFirstColor dark:border-[#29282F]">
-        <Image src={logoSrc} width={87} height={28} alt="cinemax_logo" />
+        <Image
+          src={theme === "dark" ? "/dark_mode_CineMax.svg" : "/light_mode_CineMax.svg"}
+          width={87}
+          height={28}
+          alt="cinemax_logo"
+        />
       </nav>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row justify-evenly dark:bg-darkModaFirstColor">
@@ -118,7 +109,12 @@ function Payment() {
                   checked={selectedOption === "applePay"}
                   onChange={() => handleOptionChange("applePay")}
                 />
-                <Image src={appleLogo} width={45} height={20} alt="apple_logo" />
+                <Image
+                  src={theme === "dark" ? "/payment/dark_mode_apple_pay.svg" : "/payment/apple_pay.svg"}
+                  width={45}
+                  height={20}
+                  alt="apple_logo"
+                />
               </div>
             </div>
             <p className="text-lightGrayTextColor mt-6">Or checkout using a credit card</p>
