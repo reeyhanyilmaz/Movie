@@ -2,8 +2,11 @@
 import Image from "next/image";
 import React from "react";
 import Login from "@/components/Login/Login";
+import { initialTheme } from "../utils/initialTheme";
 
 export default function Home() {
+  initialTheme(); // tema kontrol
+
   return (
     <main className="flex min-h-screen dark:bg-darkModaFirstColor">
       <Image className="dark:hidden" src="/login/light_mode_login.svg" alt="login" width={700} height={300} />

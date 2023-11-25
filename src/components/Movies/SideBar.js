@@ -9,7 +9,7 @@ function SideBar() {
       <button className="mt-6 text-base font-semibold text-grayTextColor flex">
         <Image className="mr-3" src="/movies/discover.svg" width={24} height={24} /> Discovery
       </button>
-      <button className="mt-8 text-base font-semibold text-blackTextColor flex">
+      <button className="mt-8 text-base font-semibold text-blackTextColor flex dark:text-white">
         <Image className="mr-3" src="/movies/pink_star.svg" width={24} height={24} /> Top Rated
       </button>
       <button className="mt-8 text-base font-semibold text-grayTextColor flex">

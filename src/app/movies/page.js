@@ -5,11 +5,13 @@ import useMovies from "@/hooks/useMovies";
 import useSeries from "@/hooks/useSeries";
 import MoviesNavbar from "@/components/Movies/MoviesNavbar";
 import SideBar from "@/components/Movies/SideBar";
-import "../globals.css";
+import { initialTheme } from "../../utils/initialTheme";
 
 function MovieList() {
   const { error, loading, movies } = useMovies();
   const { error: seriesError, loading: seriesLoading, series } = useSeries();
+
+  initialTheme(); // tema kontrol
 
   //scroll
   const containerRef = useRef(null);
@@ -46,7 +48,7 @@ function MovieList() {
               ref={containerRef}
               onMouseDown={handleMouseDown} //sürükleme
               onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove} // icerik kaydırma
+              onMouseMove={handleMouseMove} //icerik kaydırma
               onMouseLeave={handleMouseUp} //sürükleme bitiyor
             >
               {loading ? <p>loading...</p> : null}
@@ -63,11 +65,11 @@ function MovieList() {
                         <p className="flex justify-center rounded-lg py-1 px-2 border border-ligthModeBorderColor w-[47px] text-lightGrayTextColor dark:border-[#29282F]">
                           {item.year}
                         </p>
-                        <p className="truncate-text text-base font-bold w-[150px] dark:text-white">{item.title}</p>
+                        <p className="text-base font-bold overflow-hidden overflow-ellipsis whitespace-nowrap w-[150px] dark:text-white ">{item.title}</p>
                         <div className="flex">
                           <Image src="/movies/film.svg" width={16} height={16} />
                           {item.genre.map((genre, index) => (
-                            <p key={index} className="truncate-text text-grayTextColor text-sm flex">
+                            <p key={index} className="overflow-hidden overflow-ellipsis whitespace-nowrap text-grayTextColor text-sm flex">
                               {genre}
                               {index < item.genre.length - 1 && <span className="ml-1 mr-1">•</span>}
                             </p>
